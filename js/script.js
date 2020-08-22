@@ -1,89 +1,30 @@
-(function() {
-  var width = 320;
-  var height = 0;
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-  var streaming = false;
+var element = document.getElementById('container')
+var renderer = new THREE.WebGLRenderer();
+renderer.setClearColor(0x3e3f3a);
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-  var video = null;
-  var canvasSS = null;
-  var photo = null;
-  var startbutton = null;
+element.appendChild(renderer.domElement);
 
-  function startup() {
-    video = document.getElementById('video');
-    canvasSS = document.getElementById('canvasSS');
-    photo = document.getElementById('photo');
-    startbutton = document.getElementById('startbutton');
+function startup() {
+  var imgCircleGeometry = new THREE.SphereGeometry(2, 15, 15);
+  var imgCircleMaterial = new THREE.MeshBasicMaterial( { color: 0x09AC8D } );
+  var imgCircle = new THREE.Mesh(imgCircleGeometry, imgCircleMaterial);
+  scene.add(imgCircle); // add Mercury
 
-    navigator.mediaDevices.getUserMedia({video: true, audio: false})
-    .then(function(stream) {
-      video.srcObject = stream;
-      video.play();
-    })
-    .catch(function(err) {
-      console.log("An error occurred: " + err);
-    });
+  var t = 0;
+  function render() {
+    requestAnimationFrame(render);
+    t += 0.01;
 
-    video.addEventListener('canplay', function(ev){
-      if (!streaming) {
-        height = video.videoHeight / (video.videoWidth/width);
-      
-        // Firefox currently has a bug where the height can't be read from
-        // the video, so we will make assumptions if this happens.
-      
-        if (isNaN(height)) {
-          height = width / (4/3);
-        }
-      
-        video.setAttribute('width', width);
-        video.setAttribute('height', height);
-        canvasSS.setAttribute('width', width);
-        canvasSS.setAttribute('height', height);
-        streaming = true;
-      }
-    }, false);
+    imgCircle.position.x = 20 * Math.cos(t) + 0;
+    imgCircle.position.z = 20 * Math.sin(t) + 0;
 
-    startbutton.addEventListener('click', function(ev){
-      takepicture();
-      ev.preventDefault();
-    }, false);
-    
-    clearphoto();
+    renderer.render(scene, camera);
   }
-
-  // Fill the photo with an indication that none has been
-  // captured.
-
-  function clearphoto() {
-    var context = canvasSS.getContext('2d');
-    context.fillStyle = "#AAA";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
-  }
-  
-  // Capture a photo by fetching the current contents of the video
-  // and drawing it into a canvas, then converting that to a PNG
-  // format data URL. By drawing it on an offscreen canvas and then
-  // drawing that to the screen, we can change its size and/or apply
-  // other changes before drawing it.
-
-  function takepicture() {
-    var context = canvasSS.getContext('2d');
-    if (width && height) {
-      canvasSS.width = width;
-      canvasSS.height = height;
-      context.drawImage(video, 0, 0, width, height);
-    
-      var data = canvasSS.toDataURL('image/png');
-      photo.setAttribute('src', data);
-    } else {
-      clearphoto();
-    }
-  }
-
-  // Set up our event listener to run the startup process
-  // once loading is complete.
-  window.addEventListener('load', startup, false);
-})();
+  render();
+}
+window.addEventListener('load', startup, false);

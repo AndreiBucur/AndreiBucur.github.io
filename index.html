@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>WebRTC: Still photo capture demo</title>
-    <meta charset='utf-8'>
-    <link rel="stylesheet" href="style.css" type="text/css" media="all">
-    <script def src="js/script.js"></script>
-  </head>
+
+<head>
+  <title>WebRTC: Still photo capture demo</title>
+  <meta charset='utf-8'>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all">
+</head>
+
 <body>
-  <div class="camera">
-    <video id="video">Video stream not available.</video>
-    <button id="startbutton">Take photo</button>
-  </div>
-  <canvas id="canvasSS">
-  </canvas>
-  <div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
-  </div>
+  <div id="container"></div>        
+  
+  <script def src="js/three.min.js"></script>
+  <script def src="js/DeviceOrientationControls.js"></script>
+  <script def src="js/script.js"></script>
 </body>
 </html>
