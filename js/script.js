@@ -27,6 +27,10 @@ function startup() {
       camera.rotation.y = Math.round(event.beta);
       camera.rotation.z = Math.round(event.alpha);
 
+      console.log(Math.round(event.gamma));
+      console.log(Math.round(event.beta));
+      console.log(Math.round(event.alpha));
+
     }, true);
 
 
