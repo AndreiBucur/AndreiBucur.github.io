@@ -20,21 +20,20 @@ function startup() {
   scene.add(imgCrcle);
 
   if (window.DeviceOrientationEvent) {
-		
-		window.addEventListener("deviceorientation", function(event) 
-		{
-			
-			camera.rotation.x = Math.PI(Math.round(event.gamma));
-			camera.rotation.y = Math.PI(Math.round(event.beta));
-			camera.rotation.z = Math.PI(Math.round(event.alpha));
-			
-		}, true);
-		
-		
-		
-	} else {
-	alert("Sorry, your browser doesn't support Device Orientation");
-	}
+
+    window.addEventListener("deviceorientation", function (event) {
+
+      camera.rotation.x = Math.round(event.gamma);
+      camera.rotation.y = Math.round(event.beta);
+      camera.rotation.z = Math.round(event.alpha);
+
+    }, true);
+
+
+
+  } else {
+    alert("Sorry, your browser doesn't support Device Orientation");
+  }
 
   var t = 0;
   function render() {
