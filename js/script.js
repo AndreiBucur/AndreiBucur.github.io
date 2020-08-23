@@ -24,7 +24,7 @@ function startup() {
 
     imgCircle.position.x = 20 * Math.cos(t) + 0;
     imgCircle.position.z = 20 * Math.sin(t) + 0;
-
+    controls.update();
     renderer.render(scene, camera);
   }
   render();
