@@ -10,14 +10,21 @@ document.body.appendChild(renderer.domElement);
 element.appendChild(renderer.domElement);
 
 function startup() {
+  var loader = new THREE.TextureLoader();
+  loader.load('exampleVR1.jpg', function (texture) {
+
+    var geometry = new THREE.SphereGeometry(200, 20, 20);
+
+    var imgCrcleGeometry = new THREE.SphereGeometry(5, 15, 15);
+    var imgCrcleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture, side: THREE.BackSide, });
+    var imgCrcle = new THREE.Mesh(imgCrcleGeometry, imgCrcleMaterial);
+    scene.add(imgCrcle);
+
+  });
   var imgCircleGeometry = new THREE.SphereGeometry(2, 15, 15);
   var imgCircleMaterial = new THREE.MeshBasicMaterial({ color: 0x09AC8D });
   var imgCircle = new THREE.Mesh(imgCircleGeometry, imgCircleMaterial);
   scene.add(imgCircle);
-  var imgCrcleGeometry = new THREE.SphereGeometry(5, 15, 15);
-  var imgCrcleMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.BackSide, wireframe: true });
-  var imgCrcle = new THREE.Mesh(imgCrcleGeometry, imgCrcleMaterial);
-  scene.add(imgCrcle);
 
   if (window.DeviceOrientationEvent) {
 
