@@ -10,6 +10,8 @@ document.body.appendChild(renderer.domElement);
 element.appendChild(renderer.domElement);
 
 function startup() {
+  controls = new THREE.DeviceOrientationControls( camera );
+
   var imgCircleGeometry = new THREE.SphereGeometry(2, 15, 15);
   var imgCircleMaterial = new THREE.MeshBasicMaterial({ color: 0x09AC8D });
   var imgCircle = new THREE.Mesh(imgCircleGeometry, imgCircleMaterial);
