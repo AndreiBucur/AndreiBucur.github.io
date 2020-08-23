@@ -24,9 +24,9 @@ function startup() {
 		window.addEventListener("deviceorientation", function(event) 
 		{
 			
-			camera.rotation.x = Math.round(event.gamma);
-			camera.rotation.y = Math.round(event.beta);
-			camera.rotation.z = Math.round(event.alpha);
+			camera.rotation.x = Math.PI(Math.round(event.gamma));
+			camera.rotation.y = Math.PI(Math.round(event.beta));
+			camera.rotation.z = Math.PI(Math.round(event.alpha));
 			
 		}, true);
 		
@@ -41,8 +41,8 @@ function startup() {
     requestAnimationFrame(render);
     t += 0.05;
 
-    imgCircle.position.x = 20 * Math.cos(t) + 0;
-    imgCircle.position.z = 20 * Math.sin(t) + 0;
+    //imgCircle.position.x = 20 * Math.cos(t) + 0;
+    //imgCircle.position.z = 20 * Math.sin(t) + 0;
 
     renderer.render(scene, camera);
   }
