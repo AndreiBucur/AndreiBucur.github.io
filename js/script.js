@@ -12,17 +12,15 @@ element.appendChild(renderer.domElement);
 function startup() {
   controls = new THREE.DeviceOrientationControls( camera );
   controls.enabled = true
-  
+
   var imgCircleGeometry = new THREE.SphereGeometry(2, 15, 15);
   var imgCircleMaterial = new THREE.MeshBasicMaterial({ color: 0x09AC8D });
   var imgCircle = new THREE.Mesh(imgCircleGeometry, imgCircleMaterial);
   scene.add(imgCircle);
-  //--
   var imgCrcleGeometry = new THREE.SphereGeometry(5, 15, 15);
   var imgCrcleMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.BackSide, wireframe: true });
   var imgCrcle = new THREE.Mesh(imgCrcleGeometry, imgCrcleMaterial);
   scene.add(imgCrcle);
-  //--
 
   var t = 0;
   function render() {
