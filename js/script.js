@@ -39,9 +39,9 @@ function startup() {
       camera.rotation.y = event.beta * 0.01;
       camera.rotation.z = event.alpha * 0.01;
 
-      infoX.innerHTML = event.gamma;
-      infoY.innerHTML = event.beta;
-      infoZ.innerHTML = event.alpha;
+      infoX.innerHTML = event.gamma + " <--> " + camera.rotation.x;
+      infoY.innerHTML = event.beta + " <--> " + camera.rotation.y;
+      infoZ.innerHTML = event.alpha + " <--> " + camera.rotation.z;
 
     }, true);
 
