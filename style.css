@@ -23,3 +23,12 @@ body, html {
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
 }
+
+#info {
+  width: 100vw;
+  height: 200px;
+  background-color: blue;
+  text-align: center;
+  padding: 10px;
+  color: aliceblue;
+}

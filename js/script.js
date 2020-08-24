@@ -1,6 +1,11 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
+// info
+infoX = document.getElementById("xinfo");
+infoY = document.getElementById("yinfo");
+infoZ = document.getElementById("zinfo");
+
 var element = document.getElementById('container')
 var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0x3e3f3a);
@@ -30,13 +35,13 @@ function startup() {
 
     window.addEventListener("deviceorientation", function (event) {
 
-      camera.rotation.x = Math.round(event.gamma);
-      camera.rotation.y = Math.round(event.beta);
-      camera.rotation.z = Math.round(event.alpha);
+      camera.rotation.x = event.gamma * 0.01;
+      camera.rotation.y = event.beta * 0.01;
+      camera.rotation.z = event.alpha * 0.01;
 
-      console.log(Math.round(event.gamma));
-      console.log(Math.round(event.beta));
-      console.log(Math.round(event.alpha));
+      infoX.innerHTML = event.gamma;
+      infoY.innerHTML = event.beta;
+      infoZ.innerHTML = event.alpha;
 
     }, true);
 
