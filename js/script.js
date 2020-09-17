@@ -1,4 +1,3 @@
-const { Sphere } = require("./three.min");
 
 
 var scene = new THREE.Scene();
@@ -54,7 +53,7 @@ function startup() {
     alert("Sorry, your browser doesn't support Device Orientation");
   }
 */
-const controls = new THREE.DeviceOrientationControls(camera, imgCrcle);
+const controls = new THREE.DeviceOrientationControls(camera, imgCircle);
 controls.update();
 
   function render() {
