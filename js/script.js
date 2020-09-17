@@ -1,3 +1,5 @@
+
+
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -30,7 +32,7 @@ function startup() {
   var imgCircleMaterial = new THREE.MeshBasicMaterial({ color: 0x09AC8D });
   var imgCircle = new THREE.Mesh(imgCircleGeometry, imgCircleMaterial);
   scene.add(imgCircle);
-
+/*
   if (window.DeviceOrientationEvent) {
 
     window.addEventListener("deviceorientation", function (event) {
@@ -50,6 +52,9 @@ function startup() {
   } else {
     alert("Sorry, your browser doesn't support Device Orientation");
   }
+*/
+const controls = new THREE.DeviceOrientationControls(camera);
+controls.update();
 
   function render() {
     requestAnimationFrame(render);
