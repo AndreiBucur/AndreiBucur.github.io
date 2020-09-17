@@ -35,13 +35,13 @@ function startup() {
 
     window.addEventListener("deviceorientation", function (event) {
 
-      camera.rotation.x = event.gamma * 0.01;
-      camera.rotation.y = event.beta * 0.01;
-      camera.rotation.z = event.alpha * 0.01;
+      camera.rotation.x = event.gamma * Math.PI;
+      camera.rotation.y = event.beta * Math.PI;
+      camera.rotation.z = event.alpha * Math.PI;
 
-      infoX.innerHTML = event.gamma + " <--> " + camera.rotation.x;
-      infoY.innerHTML = event.beta + " <--> " + camera.rotation.y;
-      infoZ.innerHTML = event.alpha + " <--> " + camera.rotation.z;
+      infoX.innerHTML = event.gamma;
+      infoY.innerHTML = event.beta;
+      infoZ.innerHTML = event.alpha;
 
     }, true);
 
