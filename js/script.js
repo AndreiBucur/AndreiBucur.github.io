@@ -1,5 +1,3 @@
-
-
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -32,33 +30,39 @@ function startup() {
   var imgCircleMaterial = new THREE.MeshBasicMaterial({ color: 0x09AC8D });
   var imgCircle = new THREE.Mesh(imgCircleGeometry, imgCircleMaterial);
   scene.add(imgCircle);
-/*
-  if (window.DeviceOrientationEvent) {
+  /*
+    if (window.DeviceOrientationEvent) {
+  
+      window.addEventListener("deviceorientation", function (event) {
+  
+        camera.rotation.x = event.gamma * Math.PI;
+        camera.rotation.y = event.beta * Math.PI;
+        camera.rotation.z = event.alpha * Math.PI;
+  
+        infoX.innerHTML = event.gamma;
+        infoY.innerHTML = event.beta;
+        infoZ.innerHTML = event.alpha;
+  
+      }, true);
+  
+  
+  
+    } else {
+      alert("Sorry, your browser doesn't support Device Orientation");
+    }
+  */
 
-    window.addEventListener("deviceorientation", function (event) {
-
-      camera.rotation.x = event.gamma * Math.PI;
-      camera.rotation.y = event.beta * Math.PI;
-      camera.rotation.z = event.alpha * Math.PI;
-
-      infoX.innerHTML = event.gamma;
-      infoY.innerHTML = event.beta;
-      infoZ.innerHTML = event.alpha;
-
-    }, true);
-
-
-
-  } else {
-    alert("Sorry, your browser doesn't support Device Orientation");
-  }
-*/
-const controls = new THREE.DeviceOrientationControls(camera);
-controls.update();
+  const controls = new THREE.DeviceOrientationControls(camera, element);
+  controls.update();
 
   function render() {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
+    controls.update();
+
+    infoX.innerHTML = camera.rotation.x;
+    infoY.innerHTML = camera.rotation.y;
+    infoZ.innerHTML = camera.rotation.z;
   }
   render();
 }
