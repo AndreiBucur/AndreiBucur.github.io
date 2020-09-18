@@ -1,5 +1,5 @@
-import * as THREE from '../three.js-master/build/three.module'
-import { DeviceOrientationControls } from '../three.js-master/examples/jsm/controls/DeviceOrientationControls';
+import * as THREE from '../three.js-master/build/three.module.js'
+import { DeviceOrientationControls } from '../three.js-master/examples/jsm/controls/DeviceOrientationControls.js';
 
 
 var scene = new THREE.Scene();
