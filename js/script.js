@@ -17,6 +17,7 @@ renderer.setClearColor(0x3e3f3a);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+
 element.appendChild(renderer.domElement);
 
 function startup() {
