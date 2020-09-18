@@ -53,7 +53,7 @@ function startup() {
     alert("Sorry, your browser doesn't support Device Orientation");
   }
 */
-const controls = new THREE.DeviceOrientationControls(camera, element);
+const controls = new THREE.DeviceOrientationControls(camera);
 controls.update();
 
   function render() {
