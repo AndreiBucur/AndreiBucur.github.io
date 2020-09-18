@@ -6,9 +6,10 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 // info
+/*
 infoX = document.getElementById("xinfo");
 infoY = document.getElementById("yinfo");
-infoZ = document.getElementById("zinfo");
+infoZ = document.getElementById("zinfo");*/
 
 var element = document.getElementById('container')
 var renderer = new THREE.WebGLRenderer();
@@ -55,17 +56,18 @@ function startup() {
       alert("Sorry, your browser doesn't support Device Orientation");
     }
   */
-  controls = new DeviceOrientationControls(camera);
+  const controls = new DeviceOrientationControls(camera);
   controls.update();
 
   function render() {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
     controls.update();
-  
+    /*
     infoX.innerHTML = camera.rotation.x;
     infoY.innerHTML = camera.rotation.y;
     infoZ.innerHTML = camera.rotation.z;
+    */
   }
   render();
 }
