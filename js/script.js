@@ -1,6 +1,5 @@
-import { OrbitControls } from '@/node_modules/three/examples/jsm/controls/DeviceOrientationControls'
-
-const controls = new OrbitControls(camera, renderer.domElement)
+import * as THREE from '../three.js-master/build/three.module'
+import { DeviceOrientationControls } from '../three.js-master/examples/jsm/controls/DeviceOrientationControls';
 
 
 var scene = new THREE.Scene();
@@ -56,18 +55,18 @@ function startup() {
       alert("Sorry, your browser doesn't support Device Orientation");
     }
   */
-}
-
-controls.update();
-
-function render() {
-  requestAnimationFrame(render);
-  renderer.render(scene, camera);
+  controls = new DeviceOrientationControls(camera);
   controls.update();
 
-  infoX.innerHTML = camera.rotation.x;
-  infoY.innerHTML = camera.rotation.y;
-  infoZ.innerHTML = camera.rotation.z;
+  function render() {
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
+    controls.update();
+  
+    infoX.innerHTML = camera.rotation.x;
+    infoY.innerHTML = camera.rotation.y;
+    infoZ.innerHTML = camera.rotation.z;
+  }
+  render();
 }
-render();
 window.addEventListener('load', startup, false);
