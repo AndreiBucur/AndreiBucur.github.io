@@ -60,7 +60,8 @@ function startup() {
     infoZ.innerHTML = "Z: " + Math.round(THREE.Math.radToDeg(camera.rotation.z));
 
     if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
-      infoPhoto.innerHTML = "Just took a PHOTO!";
+      infoPhoto.innerHTML = "Just took a PHOTO! " + previousHorizontalIncrement / horizontalIncrement;
+      previousHorizontalIncrement += horizontalIncrement;
     }
   }
   render();
