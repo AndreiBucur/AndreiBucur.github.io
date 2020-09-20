@@ -14,6 +14,7 @@ document.body.appendChild(renderer.domElement);
 const infoX = document.getElementById("infoX");
 const infoY = document.getElementById("infoY");
 const infoZ = document.getElementById("infoZ");
+const infoPhoto = document.getElementById("infoPhoto");
 
 element.appendChild(renderer.domElement);
 
@@ -44,18 +45,26 @@ function startup() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   
 }
+  const horizontalIncrement = 45;
+  let previousHorizontalIncrement = 0;
+  function takeAPhoto() {
+    
+  }
 
   function render() {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
     controls.update();
 
-    infoX.innerHTML = Math.round(THREE.Math.radToDeg(camera.rotation.x));
-    infoY.innerHTML = Math.round(THREE.Math.radToDeg(camera.rotation.y));
-    infoZ.innerHTML = Math.round(THREE.Math.radToDeg(camera.rotation.z));
+    infoX.innerHTML = "X: " + Math.round(THREE.Math.radToDeg(camera.rotation.x));
+    infoY.innerHTML = "Y: " + Math.round(THREE.Math.radToDeg(camera.rotation.y));
+    infoZ.innerHTML = "Z: " + Math.round(THREE.Math.radToDeg(camera.rotation.z));
 
   }
   render();
 
+  if(Math.round(THREE.Math.radToDeg(camera.rotation.x)) == horizontalIncrement + previousHorizontalIncrement){
+    infoPhoto.innerHeight = "Just took a PHOTO!";
+  }
 }
 window.addEventListener('load', startup, false);
