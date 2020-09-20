@@ -63,7 +63,7 @@ function startup() {
   }
   render();
 
-  if(Math.round(THREE.Math.radToDeg(camera.rotation.x)) == horizontalIncrement + previousHorizontalIncrement){
+  if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
     infoPhoto.innerHeight = "Just took a PHOTO!";
   }
 }
