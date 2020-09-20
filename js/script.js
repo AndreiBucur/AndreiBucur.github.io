@@ -5,12 +5,6 @@ import { DeviceOrientationControls } from '../three.js-master/examples/jsm/contr
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-// info
-
-const infoX = document.getElementById("xinfo");
-const infoY = document.getElementById("yinfo");
-const infoZ = document.getElementById("zinfo");
-
 var element = document.getElementById('container')
 var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0x3e3f3a);
