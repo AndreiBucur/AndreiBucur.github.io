@@ -15,7 +15,6 @@ const infoX = document.getElementById("infoX");
 const infoY = document.getElementById("infoY");
 const infoZ = document.getElementById("infoZ");
 const infoPhoto = document.getElementById("infoPhoto");
-
 element.appendChild(renderer.domElement);
 
 function startup() {
@@ -60,11 +59,10 @@ function startup() {
     infoY.innerHTML = "Y: " + Math.round(THREE.Math.radToDeg(camera.rotation.y));
     infoZ.innerHTML = "Z: " + Math.round(THREE.Math.radToDeg(camera.rotation.z));
 
+    if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
+      infoPhoto.innerHTML = "Just took a PHOTO!";
+    }
   }
   render();
-
-  if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
-    infoPhoto.innerHTML = "Just took a PHOTO!";
-  }
 }
 window.addEventListener('load', startup, false);
