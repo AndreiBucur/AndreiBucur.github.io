@@ -11,6 +11,9 @@ renderer.setClearColor(0x3e3f3a);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+const infoX = document.getElementById("infoX");
+const infoY = document.getElementById("infoY");
+const infoZ = document.getElementById("infoZ");
 
 element.appendChild(renderer.domElement);
 
@@ -32,6 +35,16 @@ function startup() {
   const controls = new DeviceOrientationControls(camera);
   controls.update();
 
+  window.addEventListener( 'resize', onWindowResize, false );
+  function onWindowResize() {
+  
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  
+}
+
   function render() {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
@@ -43,5 +56,6 @@ function startup() {
 
   }
   render();
+
 }
 window.addEventListener('load', startup, false);
