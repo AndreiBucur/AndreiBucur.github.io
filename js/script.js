@@ -50,9 +50,9 @@ function startup() {
     renderer.render(scene, camera);
     controls.update();
 
-    infoX.innerHTML = camera.rotation.x;
-    infoY.innerHTML = camera.rotation.y;
-    infoZ.innerHTML = camera.rotation.z;
+    infoX.innerHTML = THREE.Math.radToDeg(camera.rotation.x);
+    infoY.innerHTML = THREE.Math.radToDeg(camera.rotation.y);
+    infoZ.innerHTML = THREE.Math.radToDeg(camera.rotation.z);
 
   }
   render();
