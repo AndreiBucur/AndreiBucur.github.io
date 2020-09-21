@@ -1,3 +1,96 @@
+  if (
+    !"mediaDevices" in navigator ||
+    !"getUserMedia" in navigator.mediaDevices
+  ) {
+    alert("Camera API is not available in your browser");
+  }
+
+  // get page elements
+  const video = document.querySelector("#video");
+  const btnPlay = document.querySelector("#btnPlay");
+  const btnPause = document.querySelector("#btnPause");
+  const btnScreenshot = document.querySelector("#btnScreenshot");
+  const btnChangeCamera = document.querySelector("#btnChangeCamera");
+  const screenshotsContainer = document.querySelector("#screenshots");
+  const canvas = document.querySelector("#canvas");
+  const devicesSelect = document.querySelector("#devicesSelect");
+
+  // video constraints
+  const constraints = {
+    video: {
+      width: {
+        //min: 1280,
+        ideal: 1920,
+      },
+      height: {
+        //min: 720,
+        ideal: 1080,
+      },
+    },
+  };
+
+  // use front face camera
+  let useFrontCamera = true;
+
+  // current video stream
+  let videoStream;
+
+  // handle events
+  // play
+  btnPlay.addEventListener("click", function () {
+    video.play();
+    btnPlay.classList.add("is-hidden");
+    btnPause.classList.remove("is-hidden");
+  });
+
+  // pause
+  btnPause.addEventListener("click", function () {
+    video.pause();
+    btnPause.classList.add("is-hidden");
+    btnPlay.classList.remove("is-hidden");
+  });
+
+  // take screenshot
+  btnScreenshot.addEventListener("click", function () {
+    const img = document.createElement("img");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+    img.src = canvas.toDataURL("image/png");
+    screenshotsContainer.prepend(img);
+  });
+
+  // switch camera
+  btnChangeCamera.addEventListener("click", function () {
+    useFrontCamera = !useFrontCamera;
+
+    initializeCamera();
+  });
+
+  // stop video stream
+  function stopVideoStream() {
+    if (videoStream) {
+      videoStream.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
+  }
+
+  // initialize
+  async function initializeCamera() {
+    stopVideoStream();
+    constraints.video.facingMode = useFrontCamera ? "user" : "environment";
+
+    try {
+      videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = videoStream;
+    } catch (err) {
+      alert("Could not access the camera //" + err);
+    }
+  }
+
+  initializeCamera();
+
 import * as THREE from '../three.js-master/build/three.module.js'
 import { DeviceOrientationControls } from '../three.js-master/examples/jsm/controls/DeviceOrientationControls.js';
 
@@ -46,105 +139,6 @@ function startup() {
 }
   const horizontalIncrement = 45;
   let previousHorizontalIncrement = 0;
-  //CAMERA LOGIC -----------------------------------
-  (function () {
-    if (
-      !"mediaDevices" in navigator ||
-      !"getUserMedia" in navigator.mediaDevices
-    ) {
-      alert("Camera API is not available in your browser");
-      return;
-    }
-  
-    // get page elements
-    const video = document.querySelector("#video");
-    const btnPlay = document.querySelector("#btnPlay");
-    const btnPause = document.querySelector("#btnPause");
-    const btnScreenshot = document.querySelector("#btnScreenshot");
-    const btnChangeCamera = document.querySelector("#btnChangeCamera");
-    const screenshotsContainer = document.querySelector("#screenshots");
-    const canvas = document.querySelector("#canvas");
-    const devicesSelect = document.querySelector("#devicesSelect");
-  
-    // video constraints
-    const constraints = {
-      video: {
-        width: {
-          //min: 1280,
-          ideal: 1920,
-        },
-        height: {
-          //min: 720,
-          ideal: 1080,
-        },
-      },
-    };
-  
-    // use front face camera
-    let useFrontCamera = true;
-  
-    // current video stream
-    let videoStream;
-  
-    // handle events
-    // play
-    btnPlay.addEventListener("click", function () {
-      video.play();
-      btnPlay.classList.add("is-hidden");
-      btnPause.classList.remove("is-hidden");
-    });
-  
-    // pause
-    btnPause.addEventListener("click", function () {
-      video.pause();
-      btnPause.classList.add("is-hidden");
-      btnPlay.classList.remove("is-hidden");
-    });
-    
-    function takeScreenShot() {
-      const img = document.createElement("img");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext("2d").drawImage(video, 0, 0);
-      img.src = canvas.toDataURL("image/png");
-      screenshotsContainer.prepend(img);
-    }
-
-    // take screenshot
-    btnScreenshot.addEventListener("click", takeScreenShot());
-  
-    // switch camera
-    btnChangeCamera.addEventListener("click", function () {
-      useFrontCamera = !useFrontCamera;
-  
-      initializeCamera();
-    });
-  
-    // stop video stream
-    function stopVideoStream() {
-      if (videoStream) {
-        videoStream.getTracks().forEach((track) => {
-          track.stop();
-        });
-      }
-    }
-  
-    // initialize
-    async function initializeCamera() {
-      stopVideoStream();
-      constraints.video.facingMode = useFrontCamera ? "user" : "environment";
-  
-      try {
-        videoStream = await navigator.mediaDevices.getUserMedia(constraints);
-        video.srcObject = videoStream;
-      } catch (err) {
-        alert("Could not access the camera //" + err);
-      }
-    }
-  
-    initializeCamera();
-  })();
-  // -----------------------------------------------
 
   function render() {
     requestAnimationFrame(render);
@@ -158,7 +152,12 @@ function startup() {
     if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
       infoPhoto.innerHTML = "Just took a PHOTO! " + previousHorizontalIncrement / horizontalIncrement;
       previousHorizontalIncrement += horizontalIncrement;
-      takeScreenShot();
+      const img = document.createElement("img");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0);
+      img.src = canvas.toDataURL("image/png");
+      screenshotsContainer.prepend(img);
     }
   }
   render();
