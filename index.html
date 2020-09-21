@@ -15,12 +15,37 @@
     <h3 id="infoY">Y: N/A</h3>
     <h3 id="infoZ">Z: N/A</h3>
   </div>
+
+  <video autoplay id="video"></video>
+  <button class="button is-hidden" id="btnPlay">
+    <span class="icon is-small">
+      Play
+    </span>
+  </button>
+  <button class="button" id="btnPause">
+    <span class="icon is-small">
+      Pause
+    </span>
+  </button>
+  <button class="button is-success" id="btnScreenshot">
+    <span class="icon is-small">
+      Take a Photo
+    </span>
+  </button>
+  <button class="button" id="btnChangeCamera">
+    <span class="icon">
+    </span>
+    <span>Switch camera</span>
+  </button>
+  </div>
+  <div id="screenshots"></div> 
   <div id="controls">
 
   </div>
+  <canvas class="is-hidden" id="canvas"></canvas>
   <!--<script def src="js/three.min.js"></script>-->
   <script def src="js/script.js" type="module"></script>
-  <!--<script def src="js/test_script.js"></script>-->
+  <script def src="js/webcam.js"></script>
 </body>
 
 </html>
