@@ -50,14 +50,25 @@
     btnPlay.classList.remove("is-hidden");
   });
 
-  // take screenshot
-  btnScreenshot.addEventListener("click", function () {
+  function takeAScreenShot() {
     const img = document.createElement("img");
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     canvas.getContext("2d").drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/png");
     screenshotsContainer.prepend(img);
+    
+    var link = document.createElement('a');
+    link.href = canvas.toDataURL("image/png");
+    link.download = 'Download.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // take screenshot
+  btnScreenshot.addEventListener("click", function () {
+    takeAScreenShot();
   });
 
   // switch camera
@@ -152,12 +163,6 @@ function startup() {
     if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
       infoPhoto.innerHTML = "Just took a PHOTO! " + previousHorizontalIncrement / horizontalIncrement;
       previousHorizontalIncrement += horizontalIncrement;
-      const img = document.createElement("img");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext("2d").drawImage(video, 0, 0);
-      img.src = canvas.toDataURL("image/png");
-      screenshotsContainer.prepend(img);
     }
   }
   render();
