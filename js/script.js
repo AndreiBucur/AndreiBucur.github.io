@@ -148,7 +148,7 @@ function startup() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   
 }
-  const horizontalIncrement = 45;
+  let horizontalIncrement = 15;
   let previousHorizontalIncrement = 0;
 
   function render() {
@@ -163,6 +163,8 @@ function startup() {
     if(Math.round(THREE.Math.radToDeg(camera.rotation.y)) >= horizontalIncrement + previousHorizontalIncrement){
       infoPhoto.innerHTML = "Just took a PHOTO! " + previousHorizontalIncrement / horizontalIncrement;
       previousHorizontalIncrement += horizontalIncrement;
+
+      takeAScreenShot();
     }
   }
   render();
